@@ -1,7 +1,13 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+const val HERO_NAME = "Madrigal"
 
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+fun main() {
+    println("The hero announces her presence in the world.")
+
+    println(HERO_NAME)
+    var playerLevel = 4
+    println(playerLevel)
+
+    println("The hero embarks on her journey to locate the enchanted sword.")
+    playerLevel += 1
+    println(playerLevel)
 }
