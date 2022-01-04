@@ -1,3 +1,5 @@
+import java.lang.Exception
+
 const val HERO_NAME = "Madrigal"
 var playerLevel = 5
 
@@ -5,13 +7,7 @@ fun main() {
     println("$HERO_NAME announces her presence to the world.")
     println("What level is $HERO_NAME?")
 
-    val playerLevelInput = readLine()!!
-    playerLevel = if (playerLevelInput.matches("""\d+""".toRegex())) {
-        playerLevelInput.toInt()
-    } else {
-        1
-    }
-
+    playerLevel = readLine()?.toIntOrNull() ?: 0
     println("$HERO_NAME's level is $playerLevel.")
 
     readBountyBoard()
@@ -29,7 +25,12 @@ private fun obtainQuest(
     playerClass: String = "paladin",
     hasBefriendedBarbarians: Boolean = true,
     hasAngeredBarbarians: Boolean = false
-): String? = when (playerLevel) {
+): String? {
+    require(playerLevel > 0) {
+        "The player's level must be at least 1."
+    }
+
+    return when (playerLevel) {
         1 -> "Meet Mr. Bubbles in the land of soft things."
         in 2..5 -> {
             val canTalkToBarbarians = !hasAngeredBarbarians && (hasBefriendedBarbarians || playerClass == "barbarian")
@@ -44,12 +45,21 @@ private fun obtainQuest(
         8 -> "Defeat Nogartse, bringer of death and eater of worlds.\""
         else -> null
     }
+}
 
 private fun readBountyBoard() {
-    println(
-        """
-        |$HERO_NAME approaches the bounty board. It reads:
-        |   "${obtainQuest(playerLevel)}"
-        """.trimMargin()
-    )
+    val message: String = try {
+        val quest: String? = obtainQuest(playerLevel)
+
+        quest?.replace("Nogartse", "xxxxxxxx")
+            ?.let {
+                """
+            |$HERO_NAME approaches the bounty board. It reads:
+            |   "$it"
+            """.trimMargin()
+            } ?: "$HERO_NAME approaches the bounty board, but it is blank."
+    } catch (e: Exception) {
+        "$HERO_NAME can't read what's on the bounty board."
+    }
+    println(message)
 }
