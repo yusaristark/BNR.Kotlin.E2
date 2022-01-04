@@ -15,9 +15,12 @@ private fun makeYellow(message: String) = "\u001b[33;1m$message\u001b[0m"
 
 private fun createTitle(name: String): String {
     return when {
+        name.count { it.isLetter() && it.isUpperCase() } == name.count { it.isLetter() } -> "The Bold"
+        name.count { it.isLetter() } > 15 -> "The Verbose"
+        name.lowercase() == name.lowercase().reversed() -> "Bringer of Palindromes"
         name.all { it.isDigit() } -> "The Identifiable"
         name.none { it.isLetter() } -> "The Witness Protection Member"
-        name.count { it.lowercase() in "aeiou" } > 4 -> "The MAster of Vowels"
+        name.count { it.lowercase() in "aeiou" } > 4 -> "The Master of Vowels"
         else -> "The Renowned Hero"
     }
 }

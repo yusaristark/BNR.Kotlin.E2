@@ -11,7 +11,7 @@ fun changeNarratorMood() {
     val mood: String
     val modifier: (String) -> String
 
-    when (Random.nextInt(1..5)) {
+    when (Random.nextInt(1..7)) {
         1 -> {
             mood = "loud"
             modifier = { message ->
@@ -37,6 +37,26 @@ fun changeNarratorMood() {
             modifier = { message ->
                 narrationsGiven++
                 "$message.\n(I have narrated $narrationsGiven things)"
+            }
+        }
+        5 -> {
+            mood = "lazy"
+            modifier = { message ->
+                message.take(message.length / 2)
+            }
+        }
+        6 -> {
+            mood = "leet"
+            modifier = { message ->
+                message.replace(Regex("\\w")) { matchResult ->
+                    when (matchResult.value) {
+                        "o", "O" -> "0"
+                        "l", "L" -> "1"
+                        "e", "E" -> "3"
+                        "t", "T" -> "7"
+                        else -> matchResult.value
+                    }
+                }
             }
         }
         else -> {
