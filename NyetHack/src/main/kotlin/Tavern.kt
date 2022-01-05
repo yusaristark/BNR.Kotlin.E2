@@ -101,3 +101,10 @@ private fun displayPatronBalances(patronGold: Map<String, Double>) {
         narrate("$patron has ${"%.2f".format(balance)} gold")
     }
 }
+
+fun <T, R> flipValues(map: Map<T, R>): Map<R, T> {
+    return map.map { entry ->
+        entry.value to entry.key
+    }.toMap()
+}
+
