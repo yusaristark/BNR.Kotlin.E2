@@ -4,7 +4,7 @@ open class Room(val name: String) {
 
     protected open val status = "Calm"
 
-    fun description() = "$name (Currently: $status)"
+    fun description() = "$name \n(Currently: $status)"
 
     open fun enterRoom() {
         narrate("There is nothing to do here")
