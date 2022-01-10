@@ -37,3 +37,30 @@ class Goblin(
     override val diceCount = 2
     override val diceSides = 8
 }
+
+class Draugr(
+    name: String = "Draugr",
+    description: String = "A scary draugr",
+    healthPoints: Int = 50
+) : Monster(name, description, healthPoints) {
+    override val diceCount = 3
+    override val diceSides = 10
+}
+
+class Werewolf(
+    name: String = "Werewolf",
+    description: String = "A sharp-toothed werewolf",
+    healthPoints: Int = 75
+) : Monster(name, description, healthPoints) {
+    override val diceCount = 4
+    override val diceSides = 12
+}
+
+class Dragon(
+    name: String = "Dragon",
+    description: String = "A dangerous red dragon",
+    healthPoints: Int = 200
+) : Monster(name, description, healthPoints) {
+    override val diceCount = 7
+    override val diceSides = 20
+}
