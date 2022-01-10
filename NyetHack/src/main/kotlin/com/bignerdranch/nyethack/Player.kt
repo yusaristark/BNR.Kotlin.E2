@@ -3,14 +3,24 @@ package com.bignerdranch.nyethack
 class Player(
     initialName: String,
     val homeTown: String = "Neversummer",
-    var healthPoints: Int,
+    override var healthPoints: Int,
     val isImmortal: Boolean
-) {
-    var name = initialName
+) : Fightable {
+    override var name = initialName
         get() = field.replaceFirstChar { it.uppercase() }
         set(value) {
             field = value.trim()
         }
+
+    override val diceCount: Int = 3
+
+    override val diceSides: Int = 4
+
+    override fun takeDamage(damage: Int) {
+        if (!isImmortal) {
+            healthPoints -= damage
+        }
+    }
 
     val title: String
         get() = when {
