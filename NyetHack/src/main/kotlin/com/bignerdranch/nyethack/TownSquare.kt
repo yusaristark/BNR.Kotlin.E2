@@ -9,7 +9,10 @@ open class TownSquare : Room("The Town Square") {
         ringBell()
     }
 
-    fun ringBell() {
-        narrate("The bell tower announces the hero's presence: $bellSound")
+    fun ringBell(times: Int = 1) {
+        narrate("The bell tower announces the hero's presence: \n")
+        repeat(times) {
+            narrate(bellSound)
+        }
     }
 }
